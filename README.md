@@ -36,5 +36,40 @@ The `useBoneSet` hook WILL NOT trigger a re-render of the component alone, unles
 
 Note: Under the hood, all `useBone*` hooks are based on `useState` to trigger component renders.
 
+### Examples
 
+```jsx
+import { bone, useBoneValue, useBoneSet } from 'bonez'
 
+const counter = bone(0)
+
+const CounterDigits = () => {
+  const count = useBoneValue(counter)
+  
+  return (
+    <div>
+      <h1>{count}</h1>
+    </div>
+  )
+}
+
+const CounterControls = () => {
+  const setCount = useBoneSet(counter)
+  
+  return (
+    <div>
+      <button onClick={() => setCount((count) => count + 1)}>Count</button>
+    </div>
+  )
+  
+}
+
+const Counter = () => {
+  return (
+    <>
+      <CounterDigits /> // This will render everytime counter bone value changes
+      <CounterControls /> // This will render only once, since it does not depends on counter bone value
+    </>
+  )
+}
+```
