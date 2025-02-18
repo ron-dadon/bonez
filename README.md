@@ -1,13 +1,10 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/ron-dadon/bonez/refs/heads/master/docs/logo.png" alt="Bonez Logo" height="200" />
 </p>
-<p align="center">
-    The backbone of React state
-</p>
 
 ----
 
-### What is Bonez?
+## What is Bonez?
 
 Bonez is a state library for React that takes the state out from React for easier state management.
 
@@ -15,7 +12,7 @@ Each unit of state is called `bone`, and all the `bone`s build the entire state 
 
 A unit of state can be as simple as a `boolean`, `number` or a `string`, but it can also be a complex data structure such as an `array`, `object` or a `function`.
 
-### How Bonez differs from `useState`?
+## How Bonez differs from `useState`?
 
 While `useState` is a React hook, a `bone` is a simple JS object with some methods and internal values.
 
@@ -26,7 +23,7 @@ A `bone` exposes 4 methods:
 3. `watch` - this adds a watcher for the `bone` value, every time the `bone` value is changed via the `setValue` method, all watchers are triggered with the new value. For easy unwatch, every call to `watch` returns an `unwatch` value to remove the specific watcher that was just added. To keep things performant and clean, watchers callbacks are indexed by their function reference, so adding the same function again as a watcher will actually not add another watcher.
 4. `unwatch` - this removes the provided watcher callback from the watchers list. Does nothing if the provided watcher function does not exist on the list.
 
-### So how it works with React?
+## So how it works with React?
 
 By the use of hooks.
 
@@ -36,7 +33,9 @@ The `useBoneSet` hook WILL NOT trigger a re-render of the component alone, unles
 
 Note: Under the hood, all `useBone*` hooks (except for `useBoneSet`) are based on `useState` to trigger component renders.
 
-### Examples
+## Examples
+
+### Simple example
 
 ```jsx
 import { bone, useBoneValue, useBoneSet } from 'bonez'
@@ -69,6 +68,66 @@ const Counter = () => {
     <>
       <CounterDigits /> // This will render everytime counter bone value changes
       <CounterControls /> // This will render only once, since it does not depends on counter bone value
+    </>
+  )
+}
+```
+
+### Pass a custom compare function
+
+```tsx
+import { bone, useBoneValue, useBoneSet } from 'bonez'
+
+interface User {
+  email: string,
+  firstName: string,
+  lastName: string
+}
+
+const user = bone<User>(null, {
+  compare: (value, newValue) => value?.email === value?.email
+})
+
+const userA : User = {
+  email: 'a@test.com',
+  firstName: 'A',
+  lastName: 'A'
+}
+
+const userB : User = {
+  email: 'b@test.com',
+  firstName: 'B',
+  lastName: 'B'
+}
+
+const UserProfile = () => {
+  const userProfile = useBoneValue(user)
+  
+  return (
+    <div>
+      <h1>{userProfile.email}</h1>
+      <h2>{userProfile.firstName} {userProfile.lastName}</h2>
+    </div>
+  )
+}
+
+const Login = () => {
+  const setUser = useBoneSet(user)
+  
+  return (
+    <div>
+      <button onClick={() => setUser({ ...userA })}>Login user A</button>
+      <button onClick={() => setUser({ ...userB })}>Login user B</button>
+    </div>
+  )
+  
+}
+
+const UserApp = () => {
+  return (
+    <>
+      <UserProfile /> // This will render everytime counter bone value changes, but since we compare by email - if we set the same user again, even though we create a new object reference every time, it will not be rendered
+      <Login /> // This will render only once, since it does not depends on counter bone value
     </>
   )
 }
