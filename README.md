@@ -34,7 +34,7 @@ When you pass a `bone` to `useBone` / `useBoneValue` / `useDerivedBoneValue` - y
 
 The `useBoneSet` hook WILL NOT trigger a re-render of the component alone, unless the component also has one of the other `useBone*` hooks. This is good for performance, since if your component only need to trigger a change to a value, but it is not dependent on it, it will not rerender.
 
-Note: Under the hood, all `useBone*` hooks are based on `useState` to trigger component renders.
+Note: Under the hood, all `useBone*` hooks (except for `useBoneSet`) are based on `useState` to trigger component renders.
 
 ### Examples
 
