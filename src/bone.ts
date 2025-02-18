@@ -10,8 +10,9 @@ export interface BoneFactoryOptions<T> {
   compare: BoneCompareFunction<T>
 }
 
+export type BoneSetterFunction<T> = (prevValue: T) => T
 export type BoneGetValueFunction<T> = () => T
-export type BoneSetValueFunction<T> = (newValue: T) => void
+export type BoneSetValueFunction<T> = (newValue: T | BoneSetterFunction<T>) => void
 export type BoneWatchFunction<T> = (watchCallback: BoneWatchCallback<T>) => () => void
 export type BoneUnwatchFunction<T> = (watchCallback: BoneWatchCallback<T>) => void
 
@@ -32,10 +33,11 @@ export function bone<T>(initialValue: T, options?: BoneFactoryOptions<T>): Bone<
   }
 
   const setValue: BoneSetValueFunction<T> = function setValue(newValue)  {
+    const nextValue = typeof newValue === 'function' ? (newValue as BoneSetterFunction<T>)(value) : newValue
     const compareFn = options?.compare || defaultCompareFunction<T>
-    if (compareFn(value, newValue)) return
-    value = newValue
-    watchers.forEach((watcher) => watcher(newValue))
+    if (compareFn(value, nextValue)) return
+    value = nextValue
+    watchers.forEach((watcher) => watcher(nextValue))
   }
 
   const watch: BoneWatchFunction<T> = function watch(watchCallback){

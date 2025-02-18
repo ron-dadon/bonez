@@ -18,6 +18,13 @@ describe('bone', () => {
     expect(b.getValue()).toEqual('new value')
   })
 
+  it('should set a new value using setter function for bone and have the right value after that', () => {
+    const b = bone<number>(0)
+    expect(b.getValue()).toEqual(0)
+    b.setValue((prevValue) => prevValue + 1)
+    expect(b.getValue()).toEqual(1)
+  })
+
   it('should setup and call watcher function with new value', () => {
     const b = bone<string>('test')
     const watcher = vi.fn()
