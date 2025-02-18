@@ -1,10 +1,11 @@
-<img src="https://raw.githubusercontent.com/ron-dadon/bonez/refs/heads/master/docs/logo.png" alt="Bonez Logo" />
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ron-dadon/bonez/refs/heads/master/docs/logo.png" alt="Bonez Logo" height="200" />
+</p>
+<p align="center">
+    The backbone of React state
+</p>
 
-<div style="text-align: center;">
-The backbone of React state
-</div>
-
----
+----
 
 ### What is Bonez?
 
