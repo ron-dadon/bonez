@@ -1,0 +1,51 @@
+{
+  "name": "bonez",
+  "version": "0.1.0",
+  "description": "The backbone of React state",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ron-dadon/bonez.git"
+  },
+  "keywords": [
+    "react",
+    "state",
+    "bone",
+    "bonez",
+    "hooks"
+  ],
+  "author": "Ron Dadon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ron-dadon/bonez/issues"
+  },
+  "homepage": "https://github.com/ron-dadon/bonez#readme",
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.2.0",
+    "@testing-library/react-hooks": "8.0.1",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "jsdom": "26.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "tsup": "8.3.6",
+    "vitest": "3.0.5",
+    "@vitest/coverage-v8": "3.0.5",
+    "typescript": "5.7.3"
+  }
+}
