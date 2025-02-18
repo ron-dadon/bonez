@@ -66,8 +66,11 @@ const CounterControls = () => {
 const Counter = () => {
   return (
     <>
-      <CounterDigits /> // This will render everytime counter bone value changes
-      <CounterControls /> // This will render only once, since it does not depends on counter bone value
+      // This will render everytime counter bone value changes
+      <CounterDigits />
+
+      // This will render only once, since it does not depends on counter bone value
+      <CounterControls /> 
     </>
   )
 }
@@ -126,9 +129,16 @@ const Login = () => {
 const UserApp = () => {
   return (
     <>
-      <UserProfile /> // This will render everytime counter bone value changes, but since we compare by email - if we set the same user again, even though we create a new object reference every time, it will not be rendered
-      <Login /> // This will render only once, since it does not depends on counter bone value
+      // This will render everytime user bone value changes, but since we compare by email,
+      // if we set the same user again, even though we create a new object reference every time, 
+      // it will not be rendered
+      <UserProfile />
+
+      // This will render only once, since it does not depends on user bone value
+      <Login /> 
     </>
   )
 }
 ```
+
+This is useful to prevent redundant renders if nothing actually changes, a simple example will be to compare objects that are returning from the server, and have `id` and `updatedAt` fields for example - if the same `id` was set, and the `updatedAt` value is not different, than the object was not actually changed and there is no need to render the component again.
