@@ -95,10 +95,6 @@ interface User {
   lastName: string
 }
 
-const user = bone<User>(null, {
-  compare: (value, newValue) => value?.email === value?.email
-})
-
 const userA : User = {
   email: 'a@test.com',
   firstName: 'A',
@@ -111,8 +107,14 @@ const userB : User = {
   lastName: 'B'
 }
 
+const user = bone<User|null>(null, {
+  compare: (value, newValue) => value?.email === value?.email
+})
+
 const UserProfile = () => {
   const userProfile = useBoneValue(user)
+  
+  if (!userProfile) return null
   
   return (
     <div>
