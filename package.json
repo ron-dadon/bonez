@@ -1,7 +1,7 @@
 {
   "name": "bonezjs",
   "version": "0.1.3",
-  "description": "The backbone of React state",
+  "description": "State library for React",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
