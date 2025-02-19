@@ -33,6 +33,14 @@ The `useBoneSet` hook WILL NOT trigger a re-render of the component alone, unles
 
 Note: Under the hood, all `useBone*` hooks (except for `useBoneSet`) are based on `useState` to trigger component renders.
 
+## Installation
+
+Add `bonezjs` using your favorite package manager. Foe example, using `npm`:
+
+```shell
+npm install bonezjs
+```
+
 ## Examples
 
 ### Simple example

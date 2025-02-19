@@ -1,5 +1,5 @@
 {
-  "name": "bonez",
+  "name": "bonezjs",
   "version": "0.1.0",
   "description": "The backbone of React state",
   "type": "module",
@@ -22,6 +22,7 @@
     "state",
     "bone",
     "bonez",
+    "bonezjs",
     "hooks"
   ],
   "author": "Ron Dadon",
